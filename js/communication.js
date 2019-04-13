@@ -4,33 +4,39 @@ var graph = require('./graph');
 var host = '192.168.1.39';
 var port = 3304;
 var allowData = false;
-   
+var allowPlot = false;  
+ 
 var setupServer = function(port) {
+    console.log("setting up things")
     server.on('error', (err) => {
         console.error(`server error:\n${err.stack}`);
         server.close();
     });
     server.on('message', (msg) => {
-        // console.log(msg);
-        processMessage(msg);
-    });
-    server.on('listening', () => {
-        const address = server.address();
-        // $("#station").html(`${address.address}:${address.port}`);
+        console.log(allowPlot);
+        if(allowPlot){
+            processMessage(msg);
+            console.log("yo");
+        }
     });
     server.bind(port);
 
     // required listners
-    $('#updStatus').click(function(event) {
+    $('#updStatus').click(function() {
+        // console.log(allowPlot);
+        graph.plotLayout();
+        allowPlot = true;
         host = $("#bioIp").val().split(":")[0];
         port = $("#bioIp").val().split(":")[1];
-        // console.log(host,port);
-        if ($(this).hasClass('btn-warning')) {
-            $(this).removeClass('btn-warning').addClass('btn-positive').html('Stop');
+
+        if($("#updStatus").text() == "Start" ||$("#updStatus").text() == "Connect" ){
+            $(this).html('Stop');
             allowData = true;
-        } else if ($(this).hasClass('btn-positive')) {
-            $(this).removeClass('btn-positive').addClass('btn-warning').html('Start');
+            allowPlot = true;
+        } else if ($("#updStatus").text() == "Stop") {
+            $(this).html('Start');
             allowData = false;
+            allowPlot = false;
         }
     });
 }

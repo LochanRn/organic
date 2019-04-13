@@ -7,8 +7,8 @@ var keyMap = {
     "6": false,
     "7": false,
     "8": false,
-    "a": false,
-    "d": false
+    "w": false,
+    "s": false
 };
 
 var initKeyboard = function () {
