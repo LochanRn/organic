@@ -1,0 +1,60 @@
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="./css/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="./fonts/Righteous-Regular.ttf">
+
+	<h1>BIO SENSOR</h1>
+
+	<script src="./js/vendor/plotly.min.js"></script>
+	<script src="./js/vendor/jquery-1.8.3.min.js"></script>
+
+<body>
+	<div class="container">
+		<div class="ipBox">
+			<div class="row">
+				<div class="col-md-8">
+					<input id="bioIp" type="text" class="form-control" placeholder="Bio IP" value="192.168.1.39:3304">
+				</div>
+				<div class="col-md-4" style="padding-left: 1px;">
+					<button id="updStatus" style="width: 100%" class="btn btn-large btn-warning">Connect</button>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-1">
+			<div class="col s4">
+				<div id="graph1"></div>
+			</div>
+			<div class="col s8">
+				<div id="graph2"></div>
+			</div>
+		</div>
+
+		<div class="row  mt-1">
+			<div class="col s4">
+				<div id="graph3"></div>
+			</div>
+
+			<div class="col s8">
+				<div id="graph4"></div>
+			</div>
+		</div>
+
+		<div class="row  mt-1">
+			<div class="col s6 l6 offset-l3">
+				<div id="graph5"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		require('./js/app.js');
+	</script>
+	<script script id="searcher" v1="1.646" c1='#DF56F1' m1='lines' v2="2.62533" m2='lines' c2='#FFA07A' v3="3"
+		m3='lines' c3='#e5ff9f' v4="4" m4='lines' cs4='#e3c950' v5="5" m5='lines' c5='#43473c' v6="6" m6='lines'
+		c6='#96160c' v7="7" m7='lines' c7='#a2ab08' ></script>
+</body>
+
+</html>
