@@ -11,3 +11,4 @@ setInterval(function() {
     // console.log(data);
     link.sendData("<" + data[0] + data[1] + ">", 0);
 }, DATA_RATE);
+

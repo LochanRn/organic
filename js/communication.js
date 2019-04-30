@@ -1,11 +1,17 @@
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
 var graph = require('./graph');
-var host = '192.168.1.39';
+var fs = require('fs');
+var csvWriter = require('csv-write-stream');
+
+var host = '127.0.0.1';
 var port = 3304;
 var allowData = false;
 var allowPlot = false;  
- 
+
+var writer = csvWriter({ headers: ['CO2','CH4','C3H8','NG']});
+writer.pipe(fs.createWriteStream('./data/data2.csv', {flags: 'a'}));
+
 var setupServer = function(port) {
     console.log("setting up things")
     server.on('error', (err) => {
@@ -13,17 +19,15 @@ var setupServer = function(port) {
         server.close();
     });
     server.on('message', (msg) => {
-        console.log(allowPlot);
+        // console.log(allowPlot);
         if(allowPlot){
             processMessage(msg);
-            console.log("yo");
         }
     });
     server.bind(port);
 
     // required listners
     $('#updStatus').click(function() {
-        // console.log(allowPlot);
         graph.plotLayout();
         allowPlot = true;
         host = $("#bioIp").val().split(":")[0];
@@ -54,14 +58,16 @@ var sendData = function(data, override) { // data should be string
 }
 
 var processMessage = function(message) {
-    var msgDec = " ";
+    var msgDec = "";
 	for (var i = 0; i < message.length; i++) {
 		msgDec += (String.fromCharCode(message[i]));
 	}
     var msg = msgDec.split(",");
+    var sensorValues = msg.slice(1,5);
+    writer.write(sensorValues);
+    // console.log(msg.slice(1,5));
     graph.plotGraph(msg);
 }
 
 module.exports.setupServer = setupServer;
 module.exports.sendData = sendData;
-// module.exports.test = "sendData";
