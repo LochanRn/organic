@@ -10,7 +10,6 @@ var allowData = false;
 var allowPlot = false;  
 
 var writer = csvWriter({ headers: ['CO2','CH4','C3H8','NG']});
-writer.pipe(fs.createWriteStream('./data/data2.csv', {flags: 'a'}));
 
 var setupServer = function(port) {
     console.log("setting up things")
@@ -19,12 +18,11 @@ var setupServer = function(port) {
         server.close();
     });
     server.on('message', (msg) => {
-        // console.log(allowPlot);
-        if(allowPlot){
+        if(allowPlot && $('#plotGraph').hasClass('btn-warning')){
             processMessage(msg);
         }
     });
-    server.bind(port);
+    server.bind(port);  
 
     // required listners
     $('#updStatus').click(function() {
@@ -32,13 +30,13 @@ var setupServer = function(port) {
         allowPlot = true;
         host = $("#bioIp").val().split(":")[0];
         port = $("#bioIp").val().split(":")[1];
-
-        if($("#updStatus").text() == "Start" ||$("#updStatus").text() == "Connect" ){
-            $(this).html('Stop');
+        
+        if ($(this).hasClass('btn-warning')) {
+            $(this).removeClass('btn-warning').addClass('btn-success').html('Stop');
             allowData = true;
             allowPlot = true;
-        } else if ($("#updStatus").text() == "Stop") {
-            $(this).html('Start');
+        } else if ($(this).text() == "Stop") {
+           $(this).removeClass('btn-success').addClass('btn-warning').html('Connect');
             allowData = false;
             allowPlot = false;
         }
