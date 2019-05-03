@@ -12,20 +12,17 @@ var setupServer = function(port) {
         console.error(`server error:\n${err.stack}`);
         server.close();
     });
+    
     server.on('message', (msg) => {
-        console.log(allowPlot);
         if(allowPlot){
-            processMessage(msg);
-            console.log("yo");
+            processMessage(msg, allowPlot);
         }
     });
     server.bind(port);
 
     // required listners
     $('#updStatus').click(function() {
-        // console.log(allowPlot);
         graph.plotLayout();
-        allowPlot = true;
         host = $("#bioIp").val().split(":")[0];
         port = $("#bioIp").val().split(":")[1];
 
@@ -49,19 +46,19 @@ var sendData = function(data, override) { // data should be string
             // $("#up").html(` ${bytes}b`);
             // TODO create log
         });
-        // console.log(data);
     }
 }
 
-var processMessage = function(message) {
+var processMessage = function(message, doubt) {
+
     var msgDec = " ";
 	for (var i = 0; i < message.length; i++) {
 		msgDec += (String.fromCharCode(message[i]));
 	}
-    var msg = msgDec.split(",");
-    graph.plotGraph(msg);
+    var msgsplit = msgDec.split(",");
+    graph.plotGraph(msgsplit, doubt);
 }
 
 module.exports.setupServer = setupServer;
 module.exports.sendData = sendData;
-// module.exports.test = "sendData";
+

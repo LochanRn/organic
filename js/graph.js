@@ -15,11 +15,6 @@ var  plotLayout = ()=> {
     var c5 = script_tag.getAttribute("c5");
     var m5 = script_tag.getAttribute("m5");
 
-    // var c6 = script_tag.getAttribute("c6");
-    // var m6 = script_tag.getAttribute("m6");
-
-    // var c7 = script_tag.getAttribute("c7");
-    // var m7 = script_tag.getAttribute("m7");
 
     function tracecall(x, y, m, c) {
         var trace = {
@@ -39,8 +34,7 @@ var  plotLayout = ()=> {
 
     var layout1 = {
         title: 'Methane',
-        //grid: {rows: 1, columns: 1, pattern: 'independent'},
-        //should start with xaxis not xaxis1
+        
         xaxis: {
             title: 'Time',
             domain: [0, 1]
@@ -104,7 +98,7 @@ var  plotLayout = ()=> {
                 tracecall('x3', 'y3', m3, c3), 
                 tracecall('x4', 'y4', m4, c4), 
                 tracecall('x5', 'y5', m5, c5)];
-    //, tracecall('x6' , 'y6', m6, c6), tracecall('x7' , 'y7', m7, c7)];
+    
 
     // TO MAKE EMPTY GRAPHS
     Plotly.plot('graph2', [data[1]], layout1)
@@ -112,15 +106,13 @@ var  plotLayout = ()=> {
     Plotly.plot('graph3', [data[2]], layout3)
     Plotly.plot('graph4', [data[3]], layout4)
     Plotly.plot('graph5', [data[4]], layout5)
-    //Plotly.plot('graph6',[data[5]],layoutcall('Carbon Dioxide'))
-    //Plotly.plot('graph7',[data[6]],layoutcall('Spectrometer'))
-
-
 }
 
-var plotGraph = (msg)=> {
+var doubt = 1;
 
-    setInterval(function () {
+var plotGraph = (msg, doubt)=> {
+
+    if(doubt===true){
 
         var time = new Date();
 
@@ -132,14 +124,14 @@ var plotGraph = (msg)=> {
                 [msg[1]]
             ]
         }, [0]);
+
+       
         Plotly.relayout('graph1', {
             'xaxis.range': [time - 5000, time]
         });
 
-    }, 100);
-
-    setInterval(function () {
-
+       
+        
         var time = new Date();
 
         Plotly.extendTraces('graph2', {
@@ -150,15 +142,12 @@ var plotGraph = (msg)=> {
                 [msg[2]]
             ]
         }, [0]);
+        
         Plotly.relayout('graph2', {
             'xaxis2.range': [time - 5000, time]
         });
-    }, 100);
 
-
-
-
-    setInterval(function () {
+        
 
         var time = new Date();
 
@@ -170,15 +159,12 @@ var plotGraph = (msg)=> {
                 [msg[3]]
             ]
         }, [0]);
+        
         Plotly.relayout('graph3', {
             'xaxis3.range': [time - 5000, time]
         });
-    }, 100);
 
-
-
-
-    setInterval(function () {
+        
 
         var time = new Date();
 
@@ -190,16 +176,12 @@ var plotGraph = (msg)=> {
                 [msg[4]]
             ]
         }, [0]);
+        
         Plotly.relayout('graph4', {
             'xaxis4.range': [time - 5000, time]
         });
-    }, 100);
 
-
-
-
-
-    setInterval(function () {
+        
 
         var time = new Date();
 
@@ -211,13 +193,14 @@ var plotGraph = (msg)=> {
                 [msg[5]]
             ]
         }, [0]);
+        
         Plotly.relayout('graph5', {
             'xaxis5.range': [time - 5000, time]
         });
-    }, 100);
+     
+    }
 
-
-}
+ }
 
 module.exports.plotLayout = plotLayout;
 module.exports.plotGraph = plotGraph;

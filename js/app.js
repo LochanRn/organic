@@ -8,6 +8,5 @@ link.setupServer(23911);
 
 setInterval(function() {
     var data = control.processKeys();
-    // console.log(data);
     link.sendData("<" + data[0] + data[1] + ">", 0);
 }, DATA_RATE);
