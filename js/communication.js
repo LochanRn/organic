@@ -17,8 +17,9 @@ var setupServer = function(port) {
         console.error(`server error:\n${err.stack}`);
         server.close();
     });
+    
     server.on('message', (msg) => {
-        if(allowPlot && $('#plotGraph').hasClass('btn-warning')){
+        if(allowPlot){
             processMessage(msg);
         }
     });
@@ -27,7 +28,6 @@ var setupServer = function(port) {
     // required listners
     $('#updStatus').click(function() {
         graph.plotLayout();
-        allowPlot = true;
         host = $("#bioIp").val().split(":")[0];
         port = $("#bioIp").val().split(":")[1];
         
@@ -51,7 +51,6 @@ var sendData = function(data, override) { // data should be string
             // $("#up").html(` ${bytes}b`);
             // TODO create log
         });
-        // console.log(data);
     }
 }
 
