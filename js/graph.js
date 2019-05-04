@@ -108,11 +108,7 @@ var  plotLayout = ()=> {
     Plotly.plot('graph5', [data[4]], layout5)
 }
 
-var doubt = 1;
-
-var plotGraph = (msg, doubt)=> {
-
-    if(doubt===true){
+var plotGraph = (msg)=> {
 
         var time = new Date();
 
@@ -197,9 +193,6 @@ var plotGraph = (msg, doubt)=> {
         Plotly.relayout('graph5', {
             'xaxis5.range': [time - 5000, time]
         });
-     
-    }
-
  }
 
 module.exports.plotLayout = plotLayout;
