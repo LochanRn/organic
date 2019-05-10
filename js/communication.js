@@ -3,6 +3,7 @@ const server = dgram.createSocket('udp4');
 var graph = require('./graph');
 var fs = require('fs');
 var csvWriter = require('csv-write-stream');
+var lineReader = require('line-reader');
 
 var host = '127.0.0.1';
 var port = 3304;
@@ -15,8 +16,6 @@ var filePlot = './data/data.csv';
 var writer = csvWriter();
 var writer = csvWriter({ headers: ['_','CO2','CH4','C3H8','NG','SPEC']});
 writer.pipe(fs.createWriteStream(fileConnect));
-
-var lineReader = require('line-reader');
 
 var setupServer = function(port) {
     console.log("setting up things")
