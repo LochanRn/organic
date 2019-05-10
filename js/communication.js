@@ -15,7 +15,6 @@ var filePlot = './data/data.csv';
 
 var writer = csvWriter();
 var writer = csvWriter({ headers: ['_','CO2','CH4','C3H8','NG','SPEC']});
-writer.pipe(fs.createWriteStream(fileConnect));
 
 var setupServer = function(port) {
     console.log("setting up things")
