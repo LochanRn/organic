@@ -1,6 +1,5 @@
 var control = require('./keyboard');
 var link = require('./communication');
-var graph = require('./graph');
 
 var DATA_RATE = 1; //ms
 
