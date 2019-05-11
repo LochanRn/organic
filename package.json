@@ -19,7 +19,15 @@
   },
   "devDependencies": {
     "electron": "^3.1.8",
-    "electron-rebuild": "^1.8.2"
+    "electron-rebuild": "^1.8.4"
   },
-  "description": ""
+  "description": "Life Science Task Gui Rudra",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LochanRn/organic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LochanRn/organic/issues"
+  },
+  "homepage": "https://github.com/LochanRn/organic#readme"
 }
