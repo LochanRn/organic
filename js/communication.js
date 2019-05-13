@@ -9,6 +9,7 @@ var host = '127.0.0.1';
 var port = 3304;
 var allowData = false;
 var allowPlot = false;  
+var lineNum = -1;
 
 var fileConnect = './data/data.csv';
 var filePlot = './data/data.csv';
@@ -47,15 +48,20 @@ var setupServer = function(port) {
             allowPlot = false;
         }
     });
- 
 }
 
 var processMessageData = function(){
     lineReader.eachLine(filePlot, function(line, last) {
-    var msg = line.split(",");
-    msg = msg.slice(0,6);
-    console.log(msg);
-    graph.plotGraph(msg);
+        if(allowPlot)
+        {
+            lineNum++;
+            var msg = line.split(",");
+            msg = msg.slice(0,6);
+            console.log(lineNum);
+            console.log(msg);
+            graph.plotGraph(msg);
+        }
+        else return;
     });
 }
 
@@ -64,10 +70,13 @@ $('#plotGraph').click(function(){
     if ($(this).hasClass('btn-warning')) {
         $(this).removeClass('btn-warning').addClass('btn-success').html('Stop');
         console.log("its working");
+        allowPlot = true;
+        lineNum = -1;
         formFileName();
         processMessageData();
     } else if ($(this).text() == "Stop") {
         $(this).removeClass('btn-success').addClass('btn-warning').html('Plot');
+        allowPlot = false;
         console.log("process stopped");
     }
 });
