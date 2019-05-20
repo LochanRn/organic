@@ -34,8 +34,7 @@ var setupServer = function(port) {
     // required listners
     $('#updStatus').click(function() {
         graph.plotLayout();
-        host = $("#bioIp").val().split(":")[0];
-        port = $("#bioIp").val().split(":")[1];
+        // console.log(host + " " + port);
         if ($(this).hasClass('btn-warning')) {
             $(this).removeClass('btn-warning').addClass('btn-success').html('Stop');
             allowData = true;
@@ -84,7 +83,10 @@ $('#plotGraph').click(function(){
 var sendData = function(data, override) { // data should be string
     if (allowData || override) {
         var message = new Buffer(data);
+        host = $("#bioIp").val().split(":")[0];
+        port = $("#bioIp").val().split(":")[1];
         server.send(message, 0, message.length, port, host, function(err, bytes) {
+            console.log(message,host,port);
             if (err) console.error(err);
         });
     }
