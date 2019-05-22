@@ -58,7 +58,7 @@ var  plotLayout = ()=> {
     };
 
     var layout3 = {
-        title: 'Propane',
+        title: 'Natural Gas',
         xaxis3: {
             title: 'Time',
             domain: [0, 1]
@@ -69,17 +69,17 @@ var  plotLayout = ()=> {
         },
     };
 
-    var layout4 = {
-        title: 'Natural Gas',
-        xaxis4: {
-            title: 'Time',
-            domain: [0, 1]
-        },
-        yaxis4: {
-            title: 'ppm',
-            domain: [0, 0.90]
-        },
-    };
+    // var layout4 = {
+    //     title: 'Natural Gas',
+    //     xaxis4: {
+    //         title: 'Time',
+    //         domain: [0, 1]
+    //     },
+    //     yaxis4: {
+    //         title: 'ppm',
+    //         domain: [0, 0.90]
+    //     },
+    // };
 
     // var layout5 = {
     //     title: 'Spectrometer',
@@ -96,16 +96,16 @@ var  plotLayout = ()=> {
     var data = [tracecall('x1', 'y1', m1, c1), 
                 tracecall('x2', 'y2', m2, c2),
                 tracecall('x3', 'y3', m3, c3), 
-                tracecall('x4', 'y4', m4, c4), 
+                // tracecall('x4', 'y4', m4, c4), 
                 // tracecall('x5', 'y5', m5, c5)
                ];
     
 
     // TO MAKE EMPTY GRAPHS
-    Plotly.plot('graph2', [data[1]], layout1)
     Plotly.plot('graph1', [data[0]], layout2)
+    Plotly.plot('graph2', [data[1]], layout1)
     Plotly.plot('graph3', [data[2]], layout3)
-    Plotly.plot('graph4', [data[3]], layout4)
+    // Plotly.plot('graph4', [data[3]], layout4)
     // Plotly.plot('graph5', [data[4]], layout5)
 }
 
@@ -165,18 +165,18 @@ var plotGraph = (msg)=> {
 
         var time = new Date();
 
-        Plotly.extendTraces('graph4', {
-            x: [
-                [time]
-            ],
-            y: [
-                [msg[4]]
-            ]
-        }, [0]);
+        // Plotly.extendTraces('graph4', {
+        //     x: [
+        //         [time]
+        //     ],
+        //     y: [
+        //         [msg[4]]
+        //     ]
+        // }, [0]);
         
-        Plotly.relayout('graph4', {
-            'xaxis4.range': [time - 5000, time]
-        });
+        // Plotly.relayout('graph4', {
+        //     'xaxis4.range': [time - 5000, time]
+        // });
 
         
 

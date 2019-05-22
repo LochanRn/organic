@@ -16,14 +16,17 @@
 	<div class="container">
 		<div class="ipBox">
 			<div class="row">
-				<div class="col-md-4">
-					<input id="bioIp" type="text" class="form-control" placeholder="Bio IP" value="192.168.1.39:3304">
+				<div class="col-md-3">
+					<input id="bioIp" type="text" class="form-control" placeholder="Bio IP" value="192.168.1.39:3306">
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3" style="padding-left: 1px;">
+					<button id="updStatus" style="width: 100%" class="btn btn-warning">Connect</button>
+				</div>
+				<div class="col-md-3">
 					<input id="fileName" type="text" class="form-control" placeholder="Enter file name" value="data.csv">
 				</div>
-				<div class="col-md-4" style="padding-left: 1px;">
-					<button id="updStatus" style="width: 100%" class="btn btn-warning">Connect</button>
+				<div class="col-md-3" style="padding-left: 1px;">
+					<button id="updGraph" style="width: 100%" class="btn btn-warning">Plot</button>
 				</div>
 			</div>
 			<div class="row mt-2">
@@ -36,22 +39,22 @@
 			</div>
 		</div>
 		<div class="row mt-1">
-			<div class="col s4">
+			<div class="col-md-6">
 				<div id="graph1"></div>
 			</div>
-			<div class="col s8">
+			<div class="col-md-6">
 				<div id="graph2"></div>
 			</div>
 		</div>
 
 		<div class="row  mt-1">
-			<div class="col s4">
+			<div class="col-md-12">
 				<div id="graph3"></div>
 			</div>
 
-			<div class="col s8">
+			<!-- <div class="col-md-6">
 				<div id="graph4"></div>
-			</div>
+			</div> -->
 		</div>
 
 		<!-- <div class="row  mt-1">
