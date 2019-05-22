@@ -5,8 +5,8 @@ var fs = require('fs');
 var csvWriter = require('csv-write-stream');
 var lineReader = require('line-reader');
 
-var host = '127.0.0.1';
-var port = 3304;
+var host = '192.168.1.78';
+var port = 3306;
 var allowData = false;
 var allowPlot = false;  
 var lineNum = -1;
@@ -33,17 +33,23 @@ var setupServer = function(port) {
 
     // required listners
     $('#updStatus').click(function() {
-        graph.plotLayout();
-        // console.log(host + " " + port);
         if ($(this).hasClass('btn-warning')) {
             $(this).removeClass('btn-warning').addClass('btn-success').html('Stop');
             allowData = true;
+        } else if ($(this).text() == "Stop") {
+           $(this).removeClass('btn-success').addClass('btn-warning').html('Connect');
+            allowData = false;         
+        }
+    });
+    $('#updGraph').click(function(){
+        graph.plotLayout();
+        if ($(this).hasClass('btn-warning')) {
+            $(this).removeClass('btn-warning').addClass('btn-success').html('Stop');
             allowPlot = true;
             formFileName();
             writer.pipe(fs.createWriteStream(fileConnect));
         } else if ($(this).text() == "Stop") {
-           $(this).removeClass('btn-success').addClass('btn-warning').html('Connect');
-            allowData = false;
+           $(this).removeClass('btn-success').addClass('btn-warning').html('Plot');
             allowPlot = false;
         }
     });
@@ -56,8 +62,8 @@ var processMessageData = function(){
             lineNum++;
             var msg = line.split(",");
             msg = msg.slice(0,6);
-            console.log(lineNum);
-            console.log(msg);
+            //console.log(lineNum);
+            //console.log(msg);
             graph.plotGraph(msg);
         }
         else return;
@@ -82,6 +88,7 @@ $('#plotGraph').click(function(){
 
 var sendData = function(data, override) { // data should be string
     if (allowData || override) {
+        data = "<" + data + ">";
         var message = new Buffer(data);
         host = $("#bioIp").val().split(":")[0];
         port = $("#bioIp").val().split(":")[1];
@@ -98,17 +105,17 @@ var processMessage = function(message) {
         msgDec += (String.fromCharCode(message[i]));
     }
     console.log(msgDec);
-    // if(msgDec[0] == '$'){
-    //     var msg = msgDec.split(",");
-    //     var sensorValues = msg.slice(0,6);
-    //     writer.write(sensorValues, (err)=>{
-    //         if (err) {
-    //             console.log(err.message);
-    //         }
-    //     });
-    //     console.log(sensorValues);
-    //     graph.plotGraph(sensorValues);
-    // }
+     if(msgDec[0] == '$'){
+         var msg = msgDec.split(",");
+         var sensorValues = msg.slice(0,6);
+         writer.write(sensorValues, (err)=>{
+             if (err) {
+                 console.log(err.message);
+             }
+         });
+         console.log(sensorValues);
+         graph.plotGraph(sensorValues);
+     }
 }
 
 var formFileName = function(){
