@@ -97,15 +97,18 @@ var processMessage = function(message) {
     for (var i = 0; i < message.length; i++) {
         msgDec += (String.fromCharCode(message[i]));
     }
-    var msg = msgDec.split(",");
-    var sensorValues = msg.slice(0,6);
-    writer.write(sensorValues, (err)=>{
-        if (err) {
-            console.log(err.message);
-        }
-    });
-    console.log(sensorValues);
-    graph.plotGraph(sensorValues);
+    console.log(msgDec);
+    // if(msgDec[0] == '$'){
+    //     var msg = msgDec.split(",");
+    //     var sensorValues = msg.slice(0,6);
+    //     writer.write(sensorValues, (err)=>{
+    //         if (err) {
+    //             console.log(err.message);
+    //         }
+    //     });
+    //     console.log(sensorValues);
+    //     graph.plotGraph(sensorValues);
+    // }
 }
 
 var formFileName = function(){
