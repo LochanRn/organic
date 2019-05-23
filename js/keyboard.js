@@ -19,14 +19,13 @@ var initKeyboard = function () {
             keyMap[event.key] = false;
     });
 }
-
 var processKeys = function () {
     var output = "";
     Object.keys(keyMap).forEach(function (key) {
         output += (keyMap[key] ? "1" : "0");
     });
     var ServoControls = parseInt(output.substring(0, 8), 2);
-
+    
     return [ServoControls];
 }
 
