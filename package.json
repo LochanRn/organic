@@ -13,12 +13,20 @@
     "csv-writer": "^1.3.0",
     "electron-nunjucks": "^1.0.3",
     "electron-prebuilt": "^1.4.13",
-    "plotty": "^0.3.1",
-    "serialport": "^7.1.4"
+    "line-reader": "^0.4.0",
+    "plotty": "^0.3.1"
   },
   "devDependencies": {
     "electron": "^3.1.8",
-    "electron-rebuild": "^1.8.2"
+    "electron-rebuild": "^1.8.4"
   },
-  "description": ""
+  "description": "Life Science Task Gui Rudra",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LochanRn/organic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LochanRn/organic/issues"
+  },
+  "homepage": "https://github.com/LochanRn/organic#readme"
 }

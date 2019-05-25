@@ -7,8 +7,6 @@ var keyMap = {
     "6": false,
     "7": false,
     "8": false,
-    "w": false,
-    "s": false
 };
 
 var initKeyboard = function () {
@@ -21,15 +19,14 @@ var initKeyboard = function () {
             keyMap[event.key] = false;
     });
 }
-
 var processKeys = function () {
     var output = "";
     Object.keys(keyMap).forEach(function (key) {
         output += (keyMap[key] ? "1" : "0");
     });
-    var innerServoControls = parseInt(output.substring(0, 8), 2);
-    var outterServoControls = parseInt(output.substring(8, 10), 2);
-    return [innerServoControls,outterServoControls];
+    var ServoControls = parseInt(output.substring(0, 8), 2);
+    
+    return [ServoControls];
 }
 
 module.exports.initKeyboard = initKeyboard;
