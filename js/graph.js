@@ -1,3 +1,59 @@
+function tracecall(x, y, m, c) {
+    var trace = {
+        x: [],
+        y: [],
+        xaxis: x,
+        yaxis: y,
+        type: m,
+        line: {
+            color: c
+        }
+    };
+    return trace;
+}
+
+var plotSpectrino = () => {
+    var script_tag = document.getElementById('searcher');
+    var c4 = script_tag.getAttribute("c4");
+    var m4 = script_tag.getAttribute("m4");
+
+    var layout4 = {
+        title: 'Spectrino Data',
+        xaxis4: {
+            title: 'Pixel #',
+            domain: [0, 1]
+        },
+        yaxis4: {
+            title: 'Intensity',
+            domain: [0, 0.90]
+        },
+    };
+
+    var data = [
+        tracecall('x4', 'y4', m4, c4), 
+   ];
+
+    Plotly.plot('graph4', [data[0]], layout4)
+}
+
+var plotSpecGraph = (msg) => {
+    console.log(msg);
+
+    Plotly.extendTraces('graph4', {
+        x: [
+            [msg.pixelNumber]
+        ],
+        y: [
+            [msg.intensity]
+        ]
+    }, [0]);
+    
+    Plotly.relayout('graph4', {
+        'xaxis4.range': [0,500],
+        'yaxis4.range':[0,500]
+    });
+}
+
 var  plotLayout = ()=> {
     var script_tag = document.getElementById('searcher')
     var c1 = script_tag.getAttribute("c1");
@@ -8,29 +64,6 @@ var  plotLayout = ()=> {
 
     var c3 = script_tag.getAttribute("c3");
     var m3 = script_tag.getAttribute("m3");
-
-    var c4 = script_tag.getAttribute("c4");
-    var m4 = script_tag.getAttribute("m4");
-
-    // var c5 = script_tag.getAttribute("c5");
-    // var m5 = script_tag.getAttribute("m5");
-
-
-    function tracecall(x, y, m, c) {
-        var trace = {
-            x: [],
-            y: [],
-            xaxis: x,
-            yaxis: y,
-            type: m,
-            line: {
-                color: c
-            }
-        };
-
-        return trace;
-    }
-
 
     var layout1 = {
         title: 'Methane',
@@ -46,7 +79,7 @@ var  plotLayout = ()=> {
     };
 
     var layout2 = {
-        title: 'Carbon Dioxide',
+        title: 'Natural Gas',
         xaxis2: {
             title: 'Time',
             domain: [0, 1]
@@ -58,7 +91,7 @@ var  plotLayout = ()=> {
     };
 
     var layout3 = {
-        title: 'Natural Gas',
+        title: 'C02',
         xaxis3: {
             title: 'Time',
             domain: [0, 1]
@@ -69,44 +102,14 @@ var  plotLayout = ()=> {
         },
     };
 
-    // var layout4 = {
-    //     title: 'Natural Gas',
-    //     xaxis4: {
-    //         title: 'Time',
-    //         domain: [0, 1]
-    //     },
-    //     yaxis4: {
-    //         title: 'ppm',
-    //         domain: [0, 0.90]
-    //     },
-    // };
-
-    // var layout5 = {
-    //     title: 'Spectrometer',
-    //     xaxis5: {
-    //         title: 'Time',
-    //         domain: [0, 1]
-    //     },
-    //     yaxis5: {
-    //         title: 'voltage(V)',
-    //         domain: [0, 0.90]
-    //     },
-    // };
-
     var data = [tracecall('x1', 'y1', m1, c1), 
                 tracecall('x2', 'y2', m2, c2),
                 tracecall('x3', 'y3', m3, c3), 
-                // tracecall('x4', 'y4', m4, c4), 
-                // tracecall('x5', 'y5', m5, c5)
                ];
-    
-
     // TO MAKE EMPTY GRAPHS
     Plotly.plot('graph1', [data[0]], layout2)
     Plotly.plot('graph2', [data[1]], layout1)
     Plotly.plot('graph3', [data[2]], layout3)
-    // Plotly.plot('graph4', [data[3]], layout4)
-    // Plotly.plot('graph5', [data[4]], layout5)
 }
 
 var plotGraph = (msg)=> {
@@ -126,9 +129,6 @@ var plotGraph = (msg)=> {
         Plotly.relayout('graph1', {
             'xaxis.range': [time - 5000, time]
         });
-
-       
-        
         var time = new Date();
 
         Plotly.extendTraces('graph2', {
@@ -143,9 +143,6 @@ var plotGraph = (msg)=> {
         Plotly.relayout('graph2', {
             'xaxis2.range': [time - 5000, time]
         });
-
-        
-
         var time = new Date();
 
         Plotly.extendTraces('graph3', {
@@ -160,41 +157,9 @@ var plotGraph = (msg)=> {
         Plotly.relayout('graph3', {
             'xaxis3.range': [time - 5000, time]
         });
-
-        
-
-        var time = new Date();
-
-        // Plotly.extendTraces('graph4', {
-        //     x: [
-        //         [time]
-        //     ],
-        //     y: [
-        //         [msg[4]]
-        //     ]
-        // }, [0]);
-        
-        // Plotly.relayout('graph4', {
-        //     'xaxis4.range': [time - 5000, time]
-        // });
-
-        
-
-        // var time = new Date();
-
-        // Plotly.extendTraces('graph5', {
-        //     x: [
-        //         [time]
-        //     ],
-        //     y: [
-        //         [msg[5]]
-        //     ]
-        // }, [0]);
-        
-        // Plotly.relayout('graph5', {
-        //     'xaxis5.range': [time - 5000, time]
-        // });
  }
 
 module.exports.plotLayout = plotLayout;
 module.exports.plotGraph = plotGraph;
+module.exports.plotSpectrino = plotSpectrino;
+module.exports.plotSpecGraph = plotSpecGraph;
